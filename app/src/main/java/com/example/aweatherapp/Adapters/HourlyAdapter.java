@@ -38,7 +38,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.viewHolder
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
         holder.hourTxt.setText(items.get(position).getHour());
-        holder.tempTxt.setText(items.get(position).getTemperature());
+        holder.tempTxt.setText(String.valueOf(items.get(position).getTemperature()));
 
         int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPicturePath(), "drawable", holder.itemView.getContext().getPackageName());
 
