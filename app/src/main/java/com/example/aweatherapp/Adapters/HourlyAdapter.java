@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.aweatherapp.Domains.Hourly;
 import com.example.aweatherapp.R;
 
@@ -40,6 +41,8 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.viewHolder
         holder.tempTxt.setText(items.get(position).getTemperature());
 
         int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPicturePath(), "drawable", holder.itemView.getContext().getPackageName());
+
+        Glide.with(context).load(drawableResourceId).into(holder.picture);
     }
 
     @Override
@@ -53,7 +56,9 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.viewHolder
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            hourTxt = itemView.findViewById(R.id.hourTxtV);
+            hourTxt = itemView.findViewById(R.id.card_hourTxtV);
+            tempTxt = itemView.findViewById(R.id.card_tempTxtV);
+            picture = itemView.findViewById(R.id.card_weatherIconImgV);
         }
     }
 }

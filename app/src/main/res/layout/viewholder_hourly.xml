@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/hourTxtV"
+            android:id="@+id/card_hourTxtV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -25,14 +25,14 @@
             android:textAlignment="center"/>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/card_weatherIconImgV"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:srcCompat="@drawable/cloudy_sunny"
             android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/card_tempTxtV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="56°"
