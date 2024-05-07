@@ -1,6 +1,9 @@
 package com.example.aweatherapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initRecyclerView();
+        setVariable();
+    }
+
+    private void setVariable() {
+        TextView weeklyForecastBtn = findViewById(R.id.weeklyForecastBtn);
+
+        weeklyForecastBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FutureActivity.class)));
     }
 
     private void initRecyclerView() {
