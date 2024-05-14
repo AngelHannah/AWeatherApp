@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        //Calling these to initialize the 7 day forecast button and the recyclerview for hour by hour
+        //Calling these to initialize the 7 day forecast button, recyclerview for hour by hour and setting current date and time
         initRecyclerView();
         setWeeklyForecastBtn();
         setDashboardDateTime();
