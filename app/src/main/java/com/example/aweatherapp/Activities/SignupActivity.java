@@ -1,6 +1,8 @@
 package com.example.aweatherapp.Activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,19 +10,48 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aweatherapp.Database.DatabaseHelper;
 import com.example.aweatherapp.R;
+import com.example.aweatherapp.databinding.ActivitySignupBinding;
 
 public class SignupActivity extends AppCompatActivity {
 
+    ActivitySignupBinding binding;
+    DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivitySignupBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_signup);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        setContentView(binding.getRoot());
+
+        dbHelper = new DatabaseHelper(this);
+
+        binding.submitSignUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = binding.signUpEmail.getText().toString();
+                String password = binding.signUpPassword.getText().toString();
+                String confirmPassword = binding.signUpConfirmPassword.getText().toString();
+                
+                if(email.equals("") || password.equals("") || confirmPassword.equals("")){
+                    Toast.makeText(SignupActivity.this, "Please complete each field", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //If passwords are the same
+                    if(password.equals(confirmPassword)){
+                          
+                        //Check for email in the db
+                        Boolean checkEmail = dbHelper.checkEmail(email);
+
+                        //If the email isnt already there then try to insert the new email/password combo
+                        if(checkEmail == false){
+                            Boolean insertData = dbHelper.insertData(email, password);
+                        }
+                    }
+                }
+            }
         });
+
     }
 }
