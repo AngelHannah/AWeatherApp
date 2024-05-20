@@ -34,11 +34,12 @@ public class SignupActivity extends AppCompatActivity {
                 String password = binding.signUpPassword.getText().toString();
                 String confirmPassword = binding.signUpConfirmPassword.getText().toString();
                 
+                //Check if any field is empty
                 if(email.equals("") || password.equals("") || confirmPassword.equals("")){
                     Toast.makeText(SignupActivity.this, "Please complete each field", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //If passwords are the same
+                    //Check if passwords are the same
                     if(password.equals(confirmPassword)){
                           
                         //Check for email in the db
@@ -46,7 +47,8 @@ public class SignupActivity extends AppCompatActivity {
 
                         //If the email isnt already there then try to insert the new email/password combo
                         if(checkEmail == false){
-                            Boolean insertData = dbHelper.insertData(email, password);
+                            //Add the new user to the db
+                            Boolean insert =  dbHelper.addUser(email, password);
                         }
                     }
                 }

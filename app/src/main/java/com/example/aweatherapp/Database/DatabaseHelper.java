@@ -13,15 +13,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Fields - database name
     public static final String databaseName = "WeatherAppDB.db";
 
+
+
     //Constructor
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "WeatherAppDB.db", null, 1);
+        super(context, databaseName, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase myDb) {
-        //This executes a sql statement that creates a table called allusers with a text column for email and for password
-        myDb.execSQL("create Table allusers(email TEXT primary key, password TEXT)");
+        //This executes a sql statement that creates a table called allusers with a text column for email and for password plus an id int
+        myDb.execSQL("create Table allusers(id INTEGER primary key autoincrement, email TEXT , password TEXT)");
     }
 
     @Override
@@ -29,8 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         myDb.execSQL("drop Table if exists allusers");
     }
 
-    //Insert
-    public Boolean insertData(String email, String password){
+    //CRUD - Create new user
+    public Boolean addUser(String email, String password){
         //Open the database
         SQLiteDatabase myDb = this.getWritableDatabase();
 
@@ -41,6 +43,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Attempt to insert the values
         long result = myDb.insert("allusers", null, contentValues);
+
+        //Close the db
+        myDb.close();
 
         if(result == -1){
             return false;
