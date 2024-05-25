@@ -8,19 +8,23 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aweatherapp.Database.DatabaseHelper;
 import com.example.aweatherapp.R;
+import com.example.aweatherapp.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends AppCompatActivity {
+public class  LoginActivity extends AppCompatActivity {
+
+    //Fields
+    ActivityLoginBinding binding;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        //Get the login binding
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        //get the root to display the login and its view
+        setContentView(binding.getRoot());
+
     }
 }
