@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.aweatherapp.Domains.User;
+
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Fields - database name
@@ -22,13 +26,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase myDb) {
-        //This executes a sql statement that creates a table called allusers with a text column for email and for password plus an id int
+        //This executes a sql statement that creates a table called allusers with a text column for email and for password plus an id int that autoincrements
         myDb.execSQL("create Table allusers(id INTEGER primary key autoincrement, email TEXT , password TEXT)");
+
+        //Seed data - insert data to the table so theres something to display
+        myDb.execSQL("insert into allusers (email, password) values('doglover13@gmail.com', 'dogloverforever14')");
+        myDb.execSQL("insert into allusers (email, password) values('tictactoe32@yahoo.com', 'tictac123')");
+        myDb.execSQL("insert into allusers (email, password) values('blurblurb57@gmail.com', 'blurbblurb')");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase myDb, int oldVersion, int newVersion) {
         myDb.execSQL("drop Table if exists allusers");
+        onCreate(myDb);
     }
 
     //CRUD - Create new user
@@ -44,13 +54,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Attempt to insert the values
         long result = myDb.insert("allusers", null, contentValues);
 
-        //Close the db
+        //Close the db connection 
         myDb.close();
 
         if(result == -1){
             return false;
         }
         else return true;
+    }
+
+    //CRUD - Reads the list of Users
+    //Some of this code comes from the SQLite tutorial we did in week 3
+    public ArrayList<User> displayUsers(){
+        //Open db connection
+        SQLiteDatabase myDb = this.getReadableDatabase();
+
+        //make a cursor so we can read the data in the db
+        Cursor cursorAllUsers = myDb.rawQuery("Select * From allusers", null);
+
+        //make a new arraylist
+        ArrayList<User> allUsersList = new ArrayList<>();
+
+        //Start the reading
+        if(cursorAllUsers.moveToFirst()){
+            //Do While to work through the db and make the list
+            do{
+
+                allUsersList.add(new User(
+                        cursorAllUsers.getInt(0),
+                        cursorAllUsers.getString(1),
+                        cursorAllUsers.getString(2)));
+            }
+            while(cursorAllUsers.moveToNext());
+        }
+
+        //Close out the cursor
+        cursorAllUsers.close();
+
+        //Return the list to be displayed
+        return allUsersList;
+
     }
 
     //This method is used to check for matching emails in the db
@@ -69,7 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //This checks both email and password
+    //This checks the email and password combo entered
     public Boolean checkEmailAndPassword(String email, String password){
         //Open db connection
         SQLiteDatabase myDb = this.getWritableDatabase();

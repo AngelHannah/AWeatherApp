@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="250dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -83,17 +83,6 @@
                     android:layout_gravity="center"
                     />
 
-                <TextView
-                    android:id="@+id/signUpLink"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Not signed up yet? Click here to sign up"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:padding="4dp"
-                    />
-
 
             </LinearLayout>
 
@@ -101,5 +90,15 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/signUpLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="4dp"
+        android:text="Not signed up yet? Click here to sign up"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>

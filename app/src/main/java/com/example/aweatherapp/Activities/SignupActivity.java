@@ -28,7 +28,7 @@ public class SignupActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
 
-        binding.submitSignUpBtn.setOnClickListener(new View.OnClickListener() {
+        binding.submitSignUpBtn.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
                 String email = binding.signUpEmail.getText().toString();
