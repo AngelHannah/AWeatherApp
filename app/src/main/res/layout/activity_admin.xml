@@ -48,7 +48,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/readBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -57,7 +57,7 @@
                     android:text="Read" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/updateBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -66,7 +66,7 @@
                     android:text="Update" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/deleteBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
