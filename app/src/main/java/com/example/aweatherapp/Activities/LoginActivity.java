@@ -42,10 +42,14 @@ public class  LoginActivity extends AppCompatActivity {
                     //Checks if the email and or pass are blank and display message if so
                     Toast.makeText(LoginActivity.this, "Email and password cannot be blank", Toast.LENGTH_SHORT).show();
                 }
+                else if(dbHelper.checkAdmin(email, password)){
+                    Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    startActivity(intent);
+                }
                 else{
                     Boolean checkCreds = dbHelper.checkEmailAndPassword(email, password);
 
-                    if(checkCreds == true){
+                    if(checkCreds){
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
