@@ -127,4 +127,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    //This method checks to see if the credentials used are the admins
+    public boolean checkAdmin(String email, String password){
+        if(email.equals("Admin") && password.equals("Admin")){
+            return true;
+        }
+        else return false;
+    }
 }

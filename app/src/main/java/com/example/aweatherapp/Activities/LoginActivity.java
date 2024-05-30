@@ -39,6 +39,7 @@ public class  LoginActivity extends AppCompatActivity {
                 String password = binding.loginPassword.getText().toString();
 
                 if(email.equals("") || password.equals("")){
+                    //Checks if the email and or pass are blank and display message if so
                     Toast.makeText(LoginActivity.this, "Email and password cannot be blank", Toast.LENGTH_SHORT).show();
                 }
                 else{
