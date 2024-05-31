@@ -11,9 +11,11 @@
 
 ### Project Testing Instructions
 1. When the app launches it will bring you to the Login Activity because that's how I've got the intents set up. At the bottom of the login screen, just below the buttons will be a link to sign up which looks like the picture with the link underlined.
+
   ![login-signuplink](https://github.com/AngelHannah/AWeatherApp/assets/87335534/36333f9a-bd5c-4cb6-8037-2cd82d092eda)
 
 2. Click the sign-up link and it'll bring you to the sign-up screen to create a new user. This takes the entered information and uses it to make a new user. This is the Create portion of CRUD functionality.
+   
   ![filledoutsignup](https://github.com/AngelHannah/AWeatherApp/assets/87335534/7cfb2178-d50d-4cf5-b0e9-0f0dfaf7c322)
   
   ![successfulsignup](https://github.com/AngelHannah/AWeatherApp/assets/87335534/df375f21-df05-43da-a6ae-25419c6ea1d8)
