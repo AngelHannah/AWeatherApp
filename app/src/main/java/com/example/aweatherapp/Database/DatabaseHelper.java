@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -16,12 +17,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Fields - database name
     public static final String databaseName = "WeatherAppDB.db";
+    public static final int databaseVersion = 1;
+    public static final String tableName = "allusers";
+    public static final String emailCol = "email";
+    public static final String passwordCol = "password";
 
 
 
     //Constructor
     public DatabaseHelper(@Nullable Context context) {
-        super(context, databaseName, null, 1);
+        super(context, databaseName, null, databaseVersion);
     }
 
     @Override
@@ -105,11 +110,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         //Take data thats passed in and store it in the contentvalues object
-        values.put(email, email);
-        values.put(password, password);
+        values.put(emailCol, email);
+        values.put(passwordCol, password);
 
-        //Call the update method and pass the data
-        int updated = myDb.update("allusers", values, "email=?", new String[]{originalEmail});
+        //Call the update method and pass the data - update returns the number of rows affected so thats whats going into updated
+        int updated = myDb.update(tableName, values, emailCol + " = ?", new String[]{originalEmail});
+
+        //Logcat message to let me know the update went through to the db
+        Log.d("DatabaseHelper", "updateUser: " + updated + " rows updated.");
 
         //Close the db out
         myDb.close();
@@ -118,6 +126,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
         else return false;
+    }
+
+    //CRUD - Deletes the selected user record
+    //This method just needs the email of the user to be deleted (probably terrible planning but its happening)
+    public boolean deleteUser(String userEmail){
+        //Get a writable connection
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //try the delete - delete returns the number of rows affected so we're storing that
+        int rowsDeleted = db.delete(tableName, emailCol + " = ?", new String[]{userEmail});
+
+        //This is a nifty thing that will print to logcat and let me know if the action is actually hitting the db or not - thanks ChatGPT
+        Log.d("DatabaseHelper", "deleteUser: " + rowsDeleted + " rows deleted.");
+
+        if(rowsDeleted > 0){
+            return true;
+        }
+        else return false;
+
     }
 
     //This method is used to check for matching emails in the db

@@ -48,18 +48,55 @@ public class AdminActivity extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Call the update method from the db helper and pass it all the data from the ET's - Uses getText and toString
-                if(dbHelper.updateUser(origEmailET.getText().toString(), emailET.getText().toString(), passwordET.getText().toString())){
-                    Toast.makeText(AdminActivity.this, "User Information Updated", Toast.LENGTH_SHORT).show();
+                //Get the data converted
+                String origEmail = origEmailET.getText().toString();
+                String newEmail = emailET.getText().toString();
+                String password = passwordET.getText().toString();
+
+                //Check to see if everything is filled out
+                if(origEmail.isEmpty() || newEmail.isEmpty() || password.isEmpty()){
+                    Toast.makeText(AdminActivity.this, "User Information Not Updated, All Fields Required", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(AdminActivity.this, "User Information Not Updated, Try Again", Toast.LENGTH_SHORT).show();
+                    //Update the user record in the db
+                    Boolean success = dbHelper.updateUser(origEmail, newEmail, password);
+                    if(success){
+                        Toast.makeText(AdminActivity.this, "User Information Updated", Toast.LENGTH_SHORT).show();
+                        //Call this to refresh the list of users after the update
+                        initUserRecyclerView();
+                    }
+                    else{
+                        Toast.makeText(AdminActivity.this, "Update Not Successful", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
-
-
             }
         });
 
+        //Onclick for the delete button
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String origEmail = origEmailET.getText().toString();
+
+                // Check if the email field is filled
+                if (origEmail.isEmpty()) {
+                    Toast.makeText(AdminActivity.this, "Please enter the original email", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Delete the user record from the db
+                    boolean success = dbHelper.deleteUser(origEmail);
+                    if (success) {
+                        Toast.makeText(AdminActivity.this, "User Deleted", Toast.LENGTH_SHORT).show();
+                        // Refresh the list of users after the deletion
+                        initUserRecyclerView();
+                    } else {
+                        Toast.makeText(AdminActivity.this, "Delete Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        //This is the method call that initializes the recycler view with the data to display
         initUserRecyclerView();
     }
 
@@ -79,4 +116,6 @@ public class AdminActivity extends AppCompatActivity {
         //Set the adapter here
         recyclerView.setAdapter(adapterUser);
     }
+
+
 }
