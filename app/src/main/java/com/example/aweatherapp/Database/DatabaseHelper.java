@@ -96,6 +96,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //CRUD - Method to update a user record
+    //This method needs to take in all the data being updated plus the id of the record the user wants to update
+    public Boolean updateUser(String originalEmail, String email, String password){
+        //Get the writable
+        SQLiteDatabase myDb = this.getWritableDatabase();
+        //Create an object for the content values
+        ContentValues values = new ContentValues();
+
+        //Take data thats passed in and store it in the contentvalues object
+        values.put(email, email);
+        values.put(password, password);
+
+        //Call the update method and pass the data
+        int updated = myDb.update("allusers", values, "email=?", new String[]{originalEmail});
+
+        //Close the db out
+        myDb.close();
+
+        if(updated > 0){
+            return true;
+        }
+        else return false;
+    }
+
     //This method is used to check for matching emails in the db
     public Boolean checkEmail(String email){
         //Open db connection

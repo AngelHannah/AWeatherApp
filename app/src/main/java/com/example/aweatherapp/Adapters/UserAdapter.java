@@ -15,9 +15,12 @@ import com.example.aweatherapp.R;
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.viewHolder> {
+
+    //Fields
     ArrayList<User> users;
     Context context;
 
+    //Constructor
     public UserAdapter(ArrayList<User> users) {
         this.users = users;
     }
