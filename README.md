@@ -21,9 +21,11 @@
   ![successfulsignup](https://github.com/AngelHannah/AWeatherApp/assets/87335534/df375f21-df05-43da-a6ae-25419c6ea1d8)
 
 3. To navigate to the Admin activity you can enter "Admin" and "Admin" as both the email and password and it will divert your login to the admin screen.
+
   ![adminpageview](https://github.com/AngelHannah/AWeatherApp/assets/87335534/3d1fae3f-f3f5-4a01-bd47-e8eed728439e)
 
 4. To Update: Updating a user requires that the admin enters the original email, the new or existing email and the new or existing password then press update
+
 5. To Delete: Delete is similar to update but only requires the admin to enter the email address into the 'original email' edit text
 
 
