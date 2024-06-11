@@ -82,14 +82,16 @@ public class AdminActivity extends AppCompatActivity {
                 // Check if the email field is filled
                 if (origEmail.isEmpty()) {
                     Toast.makeText(AdminActivity.this, "Please enter the original email", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else {
                     // Delete the user record from the db
                     boolean success = dbHelper.deleteUser(origEmail);
                     if (success) {
                         Toast.makeText(AdminActivity.this, "User Deleted", Toast.LENGTH_SHORT).show();
                         // Refresh the list of users after the deletion
                         initUserRecyclerView();
-                    } else {
+                    }
+                    else {
                         Toast.makeText(AdminActivity.this, "Delete Failed", Toast.LENGTH_SHORT).show();
                     }
                 }
