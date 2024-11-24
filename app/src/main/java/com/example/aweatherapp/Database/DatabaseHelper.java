@@ -140,10 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //This is a nifty thing that will print to logcat and let me know if the action is actually hitting the db or not - thanks ChatGPT
         Log.d("DatabaseHelper", "deleteUser: " + rowsDeleted + " rows deleted.");
 
-        if(rowsDeleted > 0){
-            return true;
-        }
-        else return false;
+        return rowsDeleted > 0;
 
     }
 
@@ -155,12 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //This is checking for the email thats being passed in to make sure it matches one in the db
         Cursor cursor = myDb.rawQuery("Select * from allusers where email = ?", new String[]{email});
 
-        if(cursor.getCount() > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return cursor.getCount() > 0;
     }
 
     //This checks the email and password combo entered
@@ -171,19 +163,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //This is checking for the email and password
         Cursor cursor = myDb.rawQuery("Select * from allusers where email = ? and password = ?", new String[]{email, password});
 
-        if(cursor.getCount() > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return cursor.getCount() > 0;
     }
 
-    //This method checks to see if the credentials used are the admins
+    //This method checks to see if the credentials used are the admins - if true you'll be loaded into the admin dashboard instead
     public boolean checkAdmin(String email, String password){
-        if(email.equals("Admin") && password.equals("Admin")){
-            return true;
-        }
-        else return false;
+        return email.equals("Admin") && password.equals("Admin");
     }
 }
